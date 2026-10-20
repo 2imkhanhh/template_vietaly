@@ -304,12 +304,22 @@
     opacity: 0.9;
 }
 
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
 .product-info h3 {
     font-family: var(--font-mona-sans);
     font-size: var(--fs-base);
     font-weight: 700;
     color: var(--color-header-text);
     margin: 0;
+    line-height: 1.35;
+    min-height: 2.7em;
+    text-align: center;
 }
 
 .product-info .price {
@@ -318,6 +328,8 @@
     font-weight: 600;
     color: var(--color-header-text);
     margin: 0;
+    margin-top: auto;
+    padding-top: 6px;
 }
 
 .showcase-pagination {
