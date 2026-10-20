@@ -298,16 +298,19 @@
                     </div>
                     <div class="booking-form-group">
                         <label>Độ tuổi</label>
-                        <div class="booking-select-wrapper">
-                            <select id="booking-age-select" required>
-                                <option value="" disabled selected hidden>Lựa chọn độ tuổi</option>
-                                <option value="under-18">Dưới 18 tuổi</option>
-                                <option value="18-25">18 - 25 tuổi</option>
-                                <option value="26-35">26 - 35 tuổi</option>
-                                <option value="36-50">36 - 50 tuổi</option>
-                                <option value="over-50">Trên 50 tuổi</option>
-                            </select>
-                            <span class="material-symbols-outlined select-arrow">expand_more</span>
+                        <div class="custom-select-box" id="custom-age-dropdown">
+                            <input type="hidden" name="age" id="booking-age-input" required>
+                            <div class="custom-select-trigger">
+                                <span class="custom-select-label">Lựa chọn độ tuổi</span>
+                                <span class="material-symbols-outlined select-arrow">expand_more</span>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-option" data-value="under-18">Dưới 18 tuổi</div>
+                                <div class="custom-option" data-value="18-25">18 - 25 tuổi</div>
+                                <div class="custom-option" data-value="26-35">26 - 35 tuổi</div>
+                                <div class="custom-option" data-value="36-50">36 - 50 tuổi</div>
+                                <div class="custom-option" data-value="over-50">Trên 50 tuổi</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -389,18 +392,36 @@
             setupPillGroup('day-pill-list');
             setupPillGroup('time-pill-list');
 
-            // Handle age select color sync
-            const ageSelect = document.getElementById('booking-age-select');
-            if (ageSelect) {
-                const updateSelectColor = () => {
-                    if (!ageSelect.value) {
-                        ageSelect.classList.add('placeholder-active');
-                    } else {
-                        ageSelect.classList.remove('placeholder-active');
+            // Handle custom age dropdown
+            const customDropdown = document.getElementById('custom-age-dropdown');
+            if (customDropdown) {
+                const trigger = customDropdown.querySelector('.custom-select-trigger');
+                const label = customDropdown.querySelector('.custom-select-label');
+                const hiddenInput = document.getElementById('booking-age-input');
+                const options = customDropdown.querySelectorAll('.custom-option');
+
+                trigger.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    customDropdown.classList.toggle('open');
+                });
+
+                options.forEach(opt => {
+                    opt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        options.forEach(o => o.classList.remove('selected'));
+                        opt.classList.add('selected');
+                        label.textContent = opt.textContent;
+                        label.classList.add('has-value');
+                        hiddenInput.value = opt.getAttribute('data-value');
+                        customDropdown.classList.remove('open');
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!customDropdown.contains(e.target)) {
+                        customDropdown.classList.remove('open');
                     }
-                };
-                updateSelectColor();
-                ageSelect.addEventListener('change', updateSelectColor);
+                });
             }
         });
     </script>
