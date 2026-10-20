@@ -258,12 +258,152 @@
                     </div>
 
                     <div class="schedule-action">
-                        <a href="#" class="btn-book">Đặt lịch</a>
+                        <a href="javascript:void(0)" class="btn-book" id="open-booking-modal">Đặt lịch</a>
                     </div>
                 </div>
             </section>
         </div>
     </main>
+
+    <!-- Booking Popup Modal -->
+    <div class="booking-modal-overlay" id="booking-modal">
+        <div class="booking-modal-card">
+            <button class="booking-modal-close" id="close-booking-modal" aria-label="Đóng popup">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+
+            <h2 class="booking-modal-title">Đặt lịch</h2>
+
+            <form class="booking-form" id="booking-form" onsubmit="event.preventDefault(); alert('Đặt lịch thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.'); document.getElementById('booking-modal').classList.remove('active'); document.body.style.overflow='';">
+                <div class="booking-form-row">
+                    <div class="booking-form-group">
+                        <label>Họ và Tên*</label>
+                        <input type="text" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="booking-form-group">
+                        <label>Số điện thoại*</label>
+                        <input type="tel" placeholder="000000000" required>
+                    </div>
+                </div>
+
+                <div class="booking-form-group full-width">
+                    <label>Khu vực*</label>
+                    <input type="text" placeholder="Phường, Thành phố,..." required>
+                </div>
+
+                <div class="booking-form-row">
+                    <div class="booking-form-group">
+                        <label>Email*</label>
+                        <input type="email" placeholder="Email của bạn" required>
+                    </div>
+                    <div class="booking-form-group">
+                        <label>Độ tuổi</label>
+                        <div class="booking-select-wrapper">
+                            <select id="booking-age-select" required>
+                                <option value="" disabled selected hidden>Lựa chọn độ tuổi</option>
+                                <option value="under-18">Dưới 18 tuổi</option>
+                                <option value="18-25">18 - 25 tuổi</option>
+                                <option value="26-35">26 - 35 tuổi</option>
+                                <option value="36-50">36 - 50 tuổi</option>
+                                <option value="over-50">Trên 50 tuổi</option>
+                            </select>
+                            <span class="material-symbols-outlined select-arrow">expand_more</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-form-group full-width">
+                    <label>Facebook</label>
+                    <input type="text" placeholder="Facebook của bạn">
+                </div>
+
+                <div class="booking-divider"></div>
+
+                <div class="booking-option-group">
+                    <label class="booking-option-title">Chọn ngày</label>
+                    <div class="booking-pill-list" id="day-pill-list">
+                        <button type="button" class="booking-pill active" data-value="thu-4">Thứ 4</button>
+                        <button type="button" class="booking-pill" data-value="thu-7">Thứ 7</button>
+                        <button type="button" class="booking-pill" data-value="chu-nhat">Chủ nhật</button>
+                    </div>
+                </div>
+
+                <div class="booking-option-group">
+                    <label class="booking-option-title">Chọn giờ</label>
+                    <div class="booking-pill-list" id="time-pill-list">
+                        <button type="button" class="booking-pill active" data-value="9:30-12:00">9:30 - 12:00</button>
+                        <button type="button" class="booking-pill" data-value="14:00-16:30">14:00 - 16:30</button>
+                    </div>
+                </div>
+
+                <div class="booking-submit-wrap">
+                    <button type="submit" class="booking-btn-submit">Đặt lịch</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('open-booking-modal');
+            const closeBtn = document.getElementById('close-booking-modal');
+            const modal = document.getElementById('booking-modal');
+
+            if (openBtn && modal) {
+                openBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', () => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Handle pill selections
+            const setupPillGroup = (containerId) => {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const pills = container.querySelectorAll('.booking-pill');
+                pills.forEach(pill => {
+                    pill.addEventListener('click', () => {
+                        pills.forEach(p => p.classList.remove('active'));
+                        pill.classList.add('active');
+                    });
+                });
+            };
+
+            setupPillGroup('day-pill-list');
+            setupPillGroup('time-pill-list');
+
+            // Handle age select color sync
+            const ageSelect = document.getElementById('booking-age-select');
+            if (ageSelect) {
+                const updateSelectColor = () => {
+                    if (!ageSelect.value) {
+                        ageSelect.classList.add('placeholder-active');
+                    } else {
+                        ageSelect.classList.remove('placeholder-active');
+                    }
+                };
+                updateSelectColor();
+                ageSelect.addEventListener('change', updateSelectColor);
+            }
+        });
+    </script>
 
     <footer class="footer-section">
         <div class="custom-container">
