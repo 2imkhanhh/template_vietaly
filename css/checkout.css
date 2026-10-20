@@ -277,14 +277,14 @@
 .ticket-top {
     position: relative;
     padding: 30px;
-    background-image: url('../../public/images/background3.svg');
+    background-image: url('../images/background3.svg');
     background-size: 100% auto;
     background-position: top center;
     background-repeat: no-repeat;
 }
 
 .ticket-bottom {
-    background-image: url('../../public/images/background2.svg');
+    background-image: url('../images/background2.svg');
     background-size: 100% auto;
     background-position: bottom center;
     background-repeat: no-repeat;

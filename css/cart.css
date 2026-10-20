@@ -118,7 +118,7 @@
 .ticket {
     position: relative;
     width: 400px;
-    background-image: url('../../public/images/background2.svg');
+    background-image: url('../images/background2.svg');
     background-size: cover;
     background-position: center;
     padding: 30px;
