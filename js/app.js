@@ -118,3 +118,68 @@ productCards.forEach(card => {
         window.location.href = 'product-detail.html';
     });
 });
+
+// Language Selectors (Topbar & Footer)
+document.addEventListener('DOMContentLoaded', () => {
+    const footerLangSelector = document.getElementById('footer-lang-selector');
+    const topbarLangSelector = document.getElementById('language-selector');
+
+    if (footerLangSelector) {
+        const btn = footerLangSelector.querySelector('.footer-lang-btn');
+        const currentText = footerLangSelector.querySelector('.footer-current-lang');
+        const options = footerLangSelector.querySelectorAll('.footer-lang-option');
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            footerLangSelector.classList.toggle('active');
+        });
+
+        options.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const langText = opt.textContent.trim();
+                currentText.textContent = langText;
+                footerLangSelector.classList.remove('active');
+
+                // Sync with topbar if present
+                const topbarText = document.getElementById('current-lang');
+                if (topbarText) {
+                    topbarText.textContent = langText;
+                }
+            });
+        });
+    }
+
+    if (topbarLangSelector) {
+        topbarLangSelector.addEventListener('click', (e) => {
+            e.stopPropagation();
+            topbarLangSelector.classList.toggle('active');
+        });
+
+        const topbarOptions = topbarLangSelector.querySelectorAll('.lang-option');
+        topbarOptions.forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const val = opt.getAttribute('data-value');
+                const langUpper = val.toUpperCase();
+                const currentText = document.getElementById('current-lang');
+                if (currentText) {
+                    currentText.textContent = langUpper;
+                }
+                topbarLangSelector.classList.remove('active');
+
+                // Sync with footer
+                const footerText = document.querySelector('.footer-current-lang');
+                if (footerText) {
+                    footerText.textContent = langUpper;
+                }
+            });
+        });
+    }
+
+    document.addEventListener('click', () => {
+        if (footerLangSelector) footerLangSelector.classList.remove('active');
+        if (topbarLangSelector) topbarLangSelector.classList.remove('active');
+    });
+});
+

@@ -115,6 +115,35 @@ if (showcaseTrack && showcaseNext && showcasePrev) {
             showcaseTransitioning = false;
         });
     });
+
+    // Auto-sync product title heights dynamically:
+    // If all product titles are 1 line, price sits close to title.
+    // If any product title wraps to 2 lines, all titles auto-expand to that max height so prices stay aligned.
+    function syncProductTitleHeights() {
+        const titleElements = showcaseTrack.querySelectorAll('.product-info h3');
+        if (titleElements.length === 0) return;
+
+        // Reset first to read natural content height
+        titleElements.forEach(el => el.style.minHeight = '');
+
+        let maxHeight = 0;
+        titleElements.forEach(el => {
+            if (el.offsetHeight > maxHeight) {
+                maxHeight = el.offsetHeight;
+            }
+        });
+
+        if (maxHeight > 0) {
+            titleElements.forEach(el => el.style.minHeight = `${maxHeight}px`);
+        }
+    }
+
+    // Sync on initial load, font load, and window resize
+    syncProductTitleHeights();
+    window.addEventListener('resize', syncProductTitleHeights);
+    if (document.fonts) {
+        document.fonts.ready.then(syncProductTitleHeights);
+    }
 }
 
 // Review Slider Logic
