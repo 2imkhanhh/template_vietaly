@@ -169,30 +169,40 @@
         <div class="store-page">
         <div class="store-map-container">
             <iframe id="map-iframe"
-                src="https://maps.google.com/maps?q=21.031599,105.798836&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                src="https://maps.google.com/maps?q=31/40C+Ung+Văn+Khiêm,+Phường+25,+Bình+Thạnh,+Hồ+Chí+Minh&t=&z=16&ie=UTF8&iwloc=&output=embed"
                 allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
         </div>
 
         <div class="store-panel">
             <h1 class="store-title">Cửa hàng</h1>
+            <p class="store-distributor-label">Các đại lý phân phối các sản phẩm do La'Vietaly chế biến</p>
 
-            <div class="store-locations">
-                <div class="store-location-card active" onclick="changeMap('hanoi', this)">
-                    <h3>Hà Nội</h3>
-                    <p>LA'VIETALY</p>
-                    <p>Địa chỉ: 123 Đường Cầu Giấy, Quận Cầu Giấy, Hà Nội, Việt Nam</p>
-                    <p>Email: hanoi@lavietaly.com<br>Số điện thoại: 0971773868</p>
-                </div>
+            <ul class="store-agent-list">
+                <li class="store-agent-item active" onclick="changeMap('hoi', this)">
+                    <span class="agent-dot"></span>
+                    <div class="agent-info">
+                        <h4 class="agent-name">Cafe Hội</h4>
+                        <p class="agent-addr">31/40c Ung Văn Khiêm P Thạnh Mỹ Tây</p>
+                    </div>
+                </li>
 
-                <div class="store-location-card" onclick="changeMap('saigon', this)">
-                    <h3>Sài Gòn</h3>
-                    <p>LA'VIETALY</p>
-                    <p>Địa chỉ: P.903, Tầng 9, Tòa nhà Diamond Plaza, 34 Lê Duẩn, Phường Sài Gòn, Thành phố Hồ Chí Minh,
-                        Việt Nam</p>
-                    <p>Email: anh.le@lavietaly.com<br>Số điện thoại: 0971773868</p>
-                </div>
-            </div>
+                <li class="store-agent-item" onclick="changeMap('heart', this)">
+                    <span class="agent-dot"></span>
+                    <div class="agent-info">
+                        <h4 class="agent-name">Heart Of VN Cafe Bar</h4>
+                        <p class="agent-addr">11 Lưu Văn Lang P Bến Thành</p>
+                    </div>
+                </li>
+
+                <li class="store-agent-item" onclick="changeMap('sugar', this)">
+                    <span class="agent-dot"></span>
+                    <div class="agent-info">
+                        <h4 class="agent-name">Sugar Daddy Eatery</h4>
+                        <p class="agent-addr">345/29 Trần Hưng Đạo, P. Cau Ong Lãnh</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -242,16 +252,21 @@
 
     <script>
         const maps = {
-            hanoi: "https://maps.google.com/maps?q=21.031599,105.798836&t=&z=16&ie=UTF8&iwloc=&output=embed",
-            saigon: "https://maps.google.com/maps?q=10.782877,106.698751&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            hoi: "https://maps.google.com/maps?q=31/40C+Ung+Văn+Khiêm,+Phường+25,+Bình+Thạnh,+Hồ+Chí+Minh&t=&z=16&ie=UTF8&iwloc=&output=embed",
+            heart: "https://maps.google.com/maps?q=11+Lưu+Văn+Lang,+Phường+Bến+Thành,+Quận+1,+Hồ+Chí+Minh&t=&z=16&ie=UTF8&iwloc=&output=embed",
+            sugar: "https://maps.google.com/maps?q=345/29+Trần+Hưng+Đạo,+Cầu+Kho,+Quận+1,+Hồ+Chí+Minh&t=&z=16&ie=UTF8&iwloc=&output=embed"
         };
 
-        function changeMap(city, element) {
-            document.getElementById('map-iframe').src = maps[city];
+        function changeMap(key, element) {
+            if (maps[key]) {
+                document.getElementById('map-iframe').src = maps[key];
+            }
 
-            const cards = document.querySelectorAll('.store-location-card');
-            cards.forEach(card => card.classList.remove('active'));
-            element.classList.add('active');
+            const items = document.querySelectorAll('.store-agent-item');
+            items.forEach(item => item.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            }
         }
     </script>
 </body>
