@@ -621,7 +621,7 @@
     }
 }
 
-/* Store / Workshop Section */
+/* Store Section */
 .store-section {
     background-color: var(--color-topbar-bg);
     padding: 85px 0;
@@ -848,9 +848,9 @@
     }
 }
 
-/* Chocolate Dipping Workshop Banner Section */
+/* Workshop Section */
 .workshop-banner-section {
-    background-color: var(--color-icon-bg); /* #F5E7C6 */
+    background-color: var(--color-icon-bg);
     padding: 70px 0 60px 0;
 }
 
@@ -1354,8 +1354,6 @@
 }
 
 @media (max-width: 992px) {
-
-    /* Review Section */
     .review-bottom-bg {
         height: 60px;
         overflow: hidden;
@@ -1407,7 +1405,6 @@
 
 @media (max-width: 768px) {
 
-    /* Product Showcase & Category */
     .product-showcase,
     .category-section,
     .instagram-section {
@@ -1447,7 +1444,6 @@
         font-size: var(--fs-base);
     }
 
-    /* Who We Are */
     .who-we-are-left,
     .who-we-are-right {
         width: 100% !important;
@@ -1458,7 +1454,6 @@
         top: -60px !important;
     }
 
-    /* Split Banner */
     .split-left,
     .split-right {
         height: 350px !important;
