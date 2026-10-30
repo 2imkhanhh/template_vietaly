@@ -119,7 +119,7 @@ productCards.forEach(card => {
     });
 });
 
-// Language Selectors (Topbar & Footer)
+// Language Selectors
 document.addEventListener('DOMContentLoaded', () => {
     const footerLangSelector = document.getElementById('footer-lang-selector');
     const topbarLangSelector = document.getElementById('language-selector');
@@ -141,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentText.textContent = langText;
                 footerLangSelector.classList.remove('active');
 
-                // Sync with topbar if present
                 const topbarText = document.getElementById('current-lang');
                 if (topbarText) {
                     topbarText.textContent = langText;
@@ -168,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 topbarLangSelector.classList.remove('active');
 
-                // Sync with footer
                 const footerText = document.querySelector('.footer-current-lang');
                 if (footerText) {
                     footerText.textContent = langUpper;
